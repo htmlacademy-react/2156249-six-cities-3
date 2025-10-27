@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import MainScreen from '../../pages/main-screen/main-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -14,37 +15,40 @@ type AppScreenProps = {
 
 function App({ placesFound }: AppScreenProps): JSX.Element {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={<MainScreen placesFound={placesFound} />}
-        />
-        <Route
-          path={AppRoute.Login}
-          element={<LoginScreen />}
-        />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
-            >
-              <FavoritesScreen />
-            </PrivateRoute>
-          }
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={AppRoute.Main}
+            element={<MainScreen placesFound={placesFound} />}
+          />
+          <Route
+            path={AppRoute.Login}
+            element={<LoginScreen />}
+          />
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <PrivateRoute
+                authorizationStatus={AuthorizationStatus.NoAuth}
+              >
+                <FavoritesScreen />
+              </PrivateRoute>
+            }
 
-        />
-        <Route
-          path={AppRoute.Offer}
-          element={<OfferScreen />}
-        />
-        <Route
-          path='*'
-          element={<NotFoundScreen />}
-        />
-      </Routes>
-    </BrowserRouter>
+          />
+          <Route
+            path={AppRoute.Offer}
+            element={<OfferScreen />}
+          />
+          <Route
+            path='*'
+            element={<NotFoundScreen />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
+
   );
 }
 
