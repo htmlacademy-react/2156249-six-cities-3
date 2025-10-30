@@ -1,6 +1,8 @@
 import { nanoid } from 'nanoid';
 import { Offer } from '../types/offer';
 
+const IMAGE_URL = 'https://22.objects.htmlacademy.pro/static/destinations/';
+
 export const offers: Offer[] = [
   {
     id: nanoid(),
@@ -23,7 +25,7 @@ export const offers: Offer[] = [
     isFavorite: false,
     isPremium: true,
     rating: 5,
-    previewImage: 'https://22.objects.htmlacademy.pro/static/destinations/1.jpg',
+    previewImage: `${IMAGE_URL}1.jpg`,
   },
   {
     id: nanoid(),
@@ -46,7 +48,7 @@ export const offers: Offer[] = [
     isFavorite: true,
     isPremium: false,
     rating: 4,
-    previewImage: 'https://22.objects.htmlacademy.pro/static/destinations/2.jpg',
+    previewImage: `${IMAGE_URL}2.jpg`,
   },
   {
     id: nanoid(),
@@ -69,7 +71,7 @@ export const offers: Offer[] = [
     isFavorite: false,
     isPremium: true,
     rating: 5,
-    previewImage: 'https://22.objects.htmlacademy.pro/static/destinations/3.jpg',
+    previewImage: `${IMAGE_URL}3.jpg`,
   },
   {
     id: nanoid(),
@@ -92,6 +94,6 @@ export const offers: Offer[] = [
     isFavorite: true,
     isPremium: false,
     rating: 3,
-    previewImage: 'https://22.objects.htmlacademy.pro/static/destinations/4.jpg',
+    previewImage: `${IMAGE_URL}4.jpg`,
   },
 ];
