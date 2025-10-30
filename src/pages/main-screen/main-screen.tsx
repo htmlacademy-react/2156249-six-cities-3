@@ -1,11 +1,13 @@
-import PlaceCard from '../../components/place-card/place-card';
 import Logo from '../../components/logo/logo';
+import OffersList from '../../components/offers-list/offers-list';
+import { Offers } from '../../types/offer';
 
 type MainScreenProps = {
   placesFound: number;
+  offers: Offers;
 };
 
-function MainScreen({ placesFound }: MainScreenProps): JSX.Element {
+function MainScreen({ placesFound, offers }: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -107,13 +109,7 @@ function MainScreen({ placesFound }: MainScreenProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-              </div>
+              <OffersList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />

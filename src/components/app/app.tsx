@@ -9,22 +9,25 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import NotFoundScreen from '../../pages/notFound-screen/notFound-screen';
 import PrivateRoute from '../private-route/private-route';
 import { Offers } from '../../types/offer';
-import { Reviews } from '../../types/review';
 
 type AppScreenProps = {
   placesFound: number;
   offers: Offers;
-  reviews: Reviews;
 };
 
-function App({ placesFound, offers, reviews }: AppScreenProps): JSX.Element {
+function App({ placesFound, offers }: AppScreenProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainScreen placesFound={placesFound} />}
+            element={
+              <MainScreen
+                placesFound={placesFound}
+                offers={offers}
+              />
+            }
           />
           <Route
             path={AppRoute.Login}
