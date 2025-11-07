@@ -9,13 +9,15 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import NotFoundScreen from '../../pages/notFound-screen/notFound-screen';
 import PrivateRoute from '../private-route/private-route';
 import { Offers } from '../../types/offer';
+import { Reviews } from '../../types/review';
 
 type AppScreenProps = {
   placesFound: number;
   offers: Offers;
+  reviews: Reviews;
 };
 
-function App({ placesFound, offers }: AppScreenProps): JSX.Element {
+function App({ placesFound, offers, reviews }: AppScreenProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -48,7 +50,11 @@ function App({ placesFound, offers }: AppScreenProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferScreen />}
+            element={
+              <OfferScreen
+                reviews={reviews}
+              />
+            }
           />
           <Route
             path='*'
