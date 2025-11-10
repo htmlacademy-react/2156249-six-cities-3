@@ -15,7 +15,7 @@ export const offers: Offers = [
         latitude: 48.85661,
         longitude: 2.351499,
         zoom: 13,
-      }
+      },
     },
     location: {
       latitude: 48.858854,
@@ -38,7 +38,7 @@ export const offers: Offers = [
         latitude: 52.37454,
         longitude: 4.897976,
         zoom: 13,
-      }
+      },
     },
     location: {
       latitude: 52.3909553943508,
@@ -61,7 +61,7 @@ export const offers: Offers = [
         latitude: 52.37454,
         longitude: 4.897976,
         zoom: 13,
-      }
+      },
     },
     location: {
       latitude: 52.3609553943508,
@@ -84,7 +84,7 @@ export const offers: Offers = [
         latitude: 50.938361,
         longitude: 6.959974,
         zoom: 13,
-      }
+      },
     },
     location: {
       latitude: 50.938361,

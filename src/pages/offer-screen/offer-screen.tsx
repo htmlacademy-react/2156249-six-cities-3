@@ -175,11 +175,10 @@ function OfferScreen({ reviews }: OfferScreenProps): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews · <span className="reviews__amount">{reviews.length}</span>
+                  Reviews ·{' '}
+                  <span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                <ReviewsList
-                  reviews={reviews}
-                />
+                <ReviewsList reviews={reviews} />
                 <ReviewForm />
               </section>
             </div>
@@ -208,7 +207,9 @@ function OfferScreen({ reviews }: OfferScreenProps): JSX.Element {
                   <div className="place-card__price-wrapper">
                     <div className="place-card__price">
                       <b className="place-card__price-value">€80</b>
-                      <span className="place-card__price-text">/&nbsp;night</span>
+                      <span className="place-card__price-text">
+                        /&nbsp;night
+                      </span>
                     </div>
                     <button
                       className="place-card__bookmark-button place-card__bookmark-button--active button"
@@ -252,7 +253,9 @@ function OfferScreen({ reviews }: OfferScreenProps): JSX.Element {
                   <div className="place-card__price-wrapper">
                     <div className="place-card__price">
                       <b className="place-card__price-value">€132</b>
-                      <span className="place-card__price-text">/&nbsp;night</span>
+                      <span className="place-card__price-text">
+                        /&nbsp;night
+                      </span>
                     </div>
                     <button
                       className="place-card__bookmark-button button"
@@ -299,7 +302,9 @@ function OfferScreen({ reviews }: OfferScreenProps): JSX.Element {
                   <div className="place-card__price-wrapper">
                     <div className="place-card__price">
                       <b className="place-card__price-value">€180</b>
-                      <span className="place-card__price-text">/&nbsp;night</span>
+                      <span className="place-card__price-text">
+                        /&nbsp;night
+                      </span>
                     </div>
                     <button
                       className="place-card__bookmark-button button"

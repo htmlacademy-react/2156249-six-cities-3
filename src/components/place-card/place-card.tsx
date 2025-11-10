@@ -9,7 +9,12 @@ type PlaceCardProps = {
   onMouseLeave: () => void;
 };
 
-function PlaceCard({ offer, isActive, onMouseEnter, onMouseLeave }: PlaceCardProps): JSX.Element {
+function PlaceCard({
+  offer,
+  isActive,
+  onMouseEnter,
+  onMouseLeave,
+}: PlaceCardProps): JSX.Element {
   const { title, type, price, isPremium, previewImage } = offer;
   const cardClass = `cities__card place-card ${isActive ? 'place-card--active' : ''}`;
 
@@ -37,19 +42,10 @@ function PlaceCard({ offer, isActive, onMouseEnter, onMouseLeave }: PlaceCardPro
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{price}</b>
-            <span className="place-card__price-text">
-              /&nbsp;night
-            </span>
+            <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button
-            className="place-card__bookmark-button button"
-            type="button"
-          >
-            <svg
-              className="place-card__bookmark-icon"
-              width={18}
-              height={19}
-            >
+          <button className="place-card__bookmark-button button" type="button">
+            <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>
             <span className="visually-hidden">To bookmarks</span>
@@ -62,9 +58,7 @@ function PlaceCard({ offer, isActive, onMouseEnter, onMouseLeave }: PlaceCardPro
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Offer}>
-            {title}
-          </Link>
+          <Link to={AppRoute.Offer}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

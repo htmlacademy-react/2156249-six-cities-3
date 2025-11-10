@@ -10,9 +10,10 @@ export const reviews: Reviews = [
     user: {
       name: 'Oliver Conner',
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      isPro: false
+      isPro: false,
     },
-    comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    comment:
+      'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     rating: 4,
   },
   {
@@ -21,10 +22,11 @@ export const reviews: Reviews = [
     user: {
       name: 'Sophie Martinez',
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      isPro: true
+      isPro: true,
     },
-    comment: 'Amazing location! The apartment was clean, modern and had everything we needed for a comfortable stay.',
-    rating: 5
+    comment:
+      'Amazing location! The apartment was clean, modern and had everything we needed for a comfortable stay.',
+    rating: 5,
   },
   {
     id: nanoid(),
@@ -32,10 +34,11 @@ export const reviews: Reviews = [
     user: {
       name: 'Thomas Johnson',
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      isPro: false
+      isPro: false,
     },
-    comment: 'Good value for money. The host was very responsive and helpful. Would recommend for short stays.',
-    rating: 3
+    comment:
+      'Good value for money. The host was very responsive and helpful. Would recommend for short stays.',
+    rating: 3,
   },
   {
     id: nanoid(),
@@ -43,10 +46,11 @@ export const reviews: Reviews = [
     user: {
       name: 'Emma Wilson',
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      isPro: true
+      isPro: true,
     },
-    comment: 'Beautiful apartment with stunning views. The interior design is impeccable and the neighborhood is very quiet.',
-    rating: 5
+    comment:
+      'Beautiful apartment with stunning views. The interior design is impeccable and the neighborhood is very quiet.',
+    rating: 5,
   },
   {
     id: nanoid(),
@@ -54,10 +58,10 @@ export const reviews: Reviews = [
     user: {
       name: 'Michael Brown',
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      isPro: false
+      isPro: false,
     },
-    comment: 'The apartment was nice but the Wi-Fi was quite slow. Otherwise, everything was as described in the listing.',
-    rating: 4
-  }
+    comment:
+      'The apartment was nice but the Wi-Fi was quite slow. Otherwise, everything was as described in the listing.',
+    rating: 4,
+  },
 ];
-

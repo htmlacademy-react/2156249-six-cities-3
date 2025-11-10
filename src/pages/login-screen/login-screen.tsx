@@ -1,4 +1,4 @@
-import {Helmet} from 'react-helmet-async';
+import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 
 function LoginScreen(): JSX.Element {
@@ -41,7 +41,10 @@ function LoginScreen(): JSX.Element {
                   required
                 />
               </div>
-              <button className="login__submit form__submit button" type="submit">
+              <button
+                className="login__submit form__submit button"
+                type="submit"
+              >
                 Sign in
               </button>
             </form>

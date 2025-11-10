@@ -3,9 +3,8 @@ export const AppRoute = {
   Main: '/',
   Login: '/login',
   Favorites: '/favorites',
-  Offer: '/offer/:id'
+  Offer: '/offer/:id',
 } as const;
-
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
