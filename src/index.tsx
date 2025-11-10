@@ -1,13 +1,8 @@
-/* eslint-disable react-refresh/only-export-components */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/app';
+import App from './app';
 import { offers } from './mocks/offers';
 import { reviews } from './mocks/reviews';
-
-const Setting = {
-  PlacesFound: 312,
-} as const;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,10 +10,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App
-      placesFound={Setting.PlacesFound}
-      offers={offers}
-      reviews={reviews}
-    />
+    <App offers={offers} reviews={reviews} />
   </React.StrictMode>
 );
