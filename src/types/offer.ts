@@ -9,12 +9,10 @@ export type City = {
   location: Location;
 };
 
-export type HousingType = 'apartment' | 'room' | 'house' | 'hotel';
-
 export type Offer = {
   id: string;
   title: string;
-  type: HousingType;
+  type: string;
   price: number;
   city: City;
   location: Location;

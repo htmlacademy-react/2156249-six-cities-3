@@ -1,15 +1,31 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '@/const';
 
-function Logo(): JSX.Element {
+type LogoProps = {
+  type: 'header' | 'footer';
+};
+
+const sizes = {
+  header: {
+    width: 81,
+    height: 41,
+  },
+  footer: {
+    width: 64,
+    height: 33,
+  },
+};
+
+function Logo({ type }: LogoProps): JSX.Element {
+  const { width, height } = sizes[type];
   return (
-    <Link className="header__logo-link" to={AppRoute.Main}>
+    <Link className={`${type}__logo-link`} to={AppRoute.Main}>
       <img
-        className="header__logo"
+        className={`${type}__logo`}
         src="img/logo.svg"
         alt="Логотип сервиса аренды жилья 6 cities (Шесть городов)"
-        width="81"
-        height="41"
+        width={width}
+        height={height}
       />
     </Link>
   );
