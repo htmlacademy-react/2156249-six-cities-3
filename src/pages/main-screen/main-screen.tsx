@@ -5,6 +5,7 @@ import { CITIES } from '@/const';
 import SortingForm from '@/components/sorting-form/sorting-form';
 import OffersList from '@/components/offers-list/offers-list';
 import { Offers } from '@/types/offer';
+import Map from '@/components/map/map';
 
 type MainScreenProps = {
   offers: Offers;
@@ -38,7 +39,7 @@ function MainScreen({ offers }: MainScreenProps): JSX.Element {
               <OffersList offers={offers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <Map className='cities__map' />
             </div>
           </div>
         </div>

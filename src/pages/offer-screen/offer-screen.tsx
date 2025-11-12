@@ -3,6 +3,7 @@ import { Reviews } from '@/types/review';
 import Header from '@/components/header/header';
 import ReviewForm from '@/components/review-form/review-form';
 import ReviewsList from '@/components/reviews-list/reviews-list';
+import Map from '@/components/map/map';
 
 type OfferScreenProps = {
   reviews: Reviews;
@@ -154,7 +155,7 @@ function OfferScreen({ reviews }: OfferScreenProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="offer__map map" />
+          <Map className='offer__map'/>
         </section>
         <div className="container">
           <section className="near-places places">
