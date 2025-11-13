@@ -39,7 +39,7 @@ function App({ offers, reviews }: AppScreenProps): JSX.Element {
         },
         {
           path: AppRoute.Offer,
-          element: <OfferScreen reviews={reviews} />,
+          element: <OfferScreen reviews={reviews} offers={offers} />,
         },
         {
           path: '*',

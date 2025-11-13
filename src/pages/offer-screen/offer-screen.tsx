@@ -1,19 +1,31 @@
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 import { Reviews } from '@/types/review';
+import { Offers } from '@/types/offer';
 import Header from '@/components/header/header';
 import ReviewForm from '@/components/review-form/review-form';
 import ReviewsList from '@/components/reviews-list/reviews-list';
 import Map from '@/components/map/map';
+import NotFoundScreen from '../notFound-screen/notFound-screen';
 
 type OfferScreenProps = {
   reviews: Reviews;
+  offers: Offers;
 };
 
-function OfferScreen({ reviews }: OfferScreenProps): JSX.Element {
+function OfferScreen({ reviews, offers }: OfferScreenProps): JSX.Element {
+  const { id } = useParams();
+
+  const offer = offers.find((item) => item.id === id);
+
+  if (!offer) {
+    return <NotFoundScreen />;
+  }
+
   return (
     <div className="page">
       <Helmet>
-        <title>6 cities: offer</title>
+        <title>6 cities: {offer.title}</title>
       </Helmet>
       <Header isAuth userEmail="Oliver.conner@gmail.com" favoriteCount={3} />
       <main className="page__main page__main--offer">
@@ -71,7 +83,7 @@ function OfferScreen({ reviews }: OfferScreenProps): JSX.Element {
               </div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {offer.title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width={31} height={33}>
