@@ -7,11 +7,11 @@ import FavoritesScreen from './pages/favorites-screen/favorites-screen';
 import OfferScreen from './pages/offer-screen/offer-screen';
 import NotFoundScreen from './pages/not-found-screen/not-found-screen';
 import PrivateRoute from './components/private-route/private-route';
-import { Offers } from './types/offer';
+import { FullOffer } from './types/offer';
 import { Reviews } from './types/review';
 
 type AppScreenProps = {
-  offers: Offers;
+  offers: FullOffer[];
   reviews: Reviews;
 };
 
