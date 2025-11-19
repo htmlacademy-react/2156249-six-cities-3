@@ -158,7 +158,7 @@ function OfferScreen({ offers, reviews }: OfferScreenProps): JSX.Element {
                 <PlaceCard
                   key={nearbyOffer.id}
                   offer={nearbyOffer}
-                  cardType="near"
+                  cardType="Near"
                   onMouseEnter={() => {}}
                   onMouseLeave={() => {}}
                 />

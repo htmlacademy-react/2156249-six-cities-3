@@ -1,5 +1,5 @@
 import { useState, Fragment } from 'react';
-import { RatingValues, MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH } from '@/const';
+import { RatingValues, MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH } from './const';
 
 function ReviewForm(): JSX.Element {
   const [userReview, setUserReview] = useState<string>('');
@@ -16,6 +16,7 @@ function ReviewForm(): JSX.Element {
 
   const handleReviewChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = evt.target.value;
+
     if (text.length <= MAX_REVIEW_LENGTH) {
       setUserReview(text);
     }

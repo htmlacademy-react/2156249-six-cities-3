@@ -1,5 +1,6 @@
 import { Link, generatePath } from 'react-router-dom';
-import { AppRoute, CardConfig } from '@/const';
+import { AppRoute } from '@/const';
+import { CardConfig } from './const';
 import { Offer } from '@/types/offer';
 import { CardType } from '@/types/card';
 import Badge from '../badge/badge';

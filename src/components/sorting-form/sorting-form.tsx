@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SortOptions } from '@/const';
+import { SortOptions } from './const';
 
 type SortingFormProps = {
   currentSort: string;
