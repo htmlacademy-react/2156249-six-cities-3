@@ -16,6 +16,8 @@ type AppScreenProps = {
 };
 
 function App({ offers, reviews }: AppScreenProps): JSX.Element {
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -33,7 +35,7 @@ function App({ offers, reviews }: AppScreenProps): JSX.Element {
           path: AppRoute.Favorites,
           element: (
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <FavoritesScreen favorites={offers} />
+              <FavoritesScreen favorites={favoriteOffers} />
             </PrivateRoute>
           ),
         },
