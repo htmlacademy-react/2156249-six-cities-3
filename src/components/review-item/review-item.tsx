@@ -31,7 +31,7 @@ function ReviewItem({ review }: ReviewItemProps): JSX.Element {
           </div>
         </div>
         <p className="reviews__text">{comment}</p>
-        <time className="reviews__time" dateTime="2019-04-24">
+        <time className="reviews__time" dateTime={date}>
           {formatDate(date)}
         </time>
       </div>
