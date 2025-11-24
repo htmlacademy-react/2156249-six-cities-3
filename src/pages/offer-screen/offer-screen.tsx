@@ -46,8 +46,13 @@ function OfferScreen({ offers, reviews }: OfferScreenProps): JSX.Element {
   const ratingWidth = `${(Math.round(rating) / 5) * 100}%`;
 
   const nearbyOffers = offers
-    .filter((item) => item.city.name === offer.city.name && item.id !== offer.id)
+    .filter(
+      (item) => item.city.name === offer.city.name && item.id !== offer.id
+    )
     .slice(0, 3);
+
+  const selectedCity = offer.city;
+  const offersForMap = [offer, ...nearbyOffers];
 
   return (
     <div className="page">
@@ -146,7 +151,11 @@ function OfferScreen({ offers, reviews }: OfferScreenProps): JSX.Element {
               </section>
             </div>
           </div>
-          <Map className="offer__map" />
+          <Map
+            className="offer__map"
+            city={selectedCity}
+            offers={offersForMap}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
