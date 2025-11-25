@@ -5,7 +5,7 @@ import { CardType } from '@/types/card';
 type OffersListProps = {
   offers: Offer[];
   cardType: CardType;
-  handleCardHover: (offer: Offer) => void;
+  handleCardHover: (offer: Offer | null) => void;
 };
 
 function OffersList({ offers, cardType, handleCardHover }: OffersListProps): JSX.Element {
@@ -17,7 +17,7 @@ function OffersList({ offers, cardType, handleCardHover }: OffersListProps): JSX
           key={offer.id}
           offer={offer}
           cardType={cardType}
-          onMouseEnter={handleCardHover}
+          handleCardHover={handleCardHover}
         />
       ))}
     </div>
