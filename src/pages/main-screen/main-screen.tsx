@@ -20,6 +20,8 @@ function MainScreen({ offers }: MainScreenProps): JSX.Element {
     setSelectedOffer(offer || null);
   };
 
+  const selectedOfferId = selectedOffer?.id || null;
+
   //Временное решение для теста
   const amsterdamOffers = offers.filter(
     (offer) => offer.city.name === 'Amsterdam'
@@ -49,7 +51,7 @@ function MainScreen({ offers }: MainScreenProps): JSX.Element {
               />
               <OffersList
                 offers={amsterdamOffers}
-                cardType="Main"
+                cardType="main"
                 handleCardHover={handleCardHover}
               />
             </section>
@@ -58,7 +60,7 @@ function MainScreen({ offers }: MainScreenProps): JSX.Element {
                 className="cities__map"
                 city={selectedCity}
                 offers={amsterdamOffers}
-                selectedOffer={selectedOffer}
+                selectedOfferId={selectedOfferId}
               />
             </div>
           </div>

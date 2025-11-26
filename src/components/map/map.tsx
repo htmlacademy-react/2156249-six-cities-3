@@ -10,7 +10,7 @@ type MapProps = {
   className: string;
   city: City;
   offers: Offer[];
-  selectedOffer: Offer | null;
+  selectedOfferId: string | null;
 };
 
 const defaultCustomIcon = leaflet.icon({
@@ -29,13 +29,22 @@ function Map({
   className,
   city,
   offers,
-  selectedOffer,
+  selectedOfferId,
 }: MapProps): JSX.Element {
   const mapContainerRef = useRef(null);
   const map = useMap(mapContainerRef, city);
 
+  const markerLayerRef = useRef<leaflet.LayerGroup | null>(null);
+
   useEffect(() => {
     if (map) {
+
+      if (!markerLayerRef.current) {
+        markerLayerRef.current = leaflet.layerGroup().addTo(map);
+      }
+
+      markerLayerRef.current.clearLayers();
+
       offers.forEach((offer) => {
         leaflet
           .marker(
@@ -45,15 +54,15 @@ function Map({
             },
             {
               icon:
-                offer.id === selectedOffer?.id
+                offer.id === selectedOfferId
                   ? currentCustomIcon
                   : defaultCustomIcon,
             }
           )
-          .addTo(map);
+          .addTo(markerLayerRef.current!);
       });
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, offers, selectedOfferId]);
 
   return <section className={clsx('map', className)} ref={mapContainerRef} />;
 }

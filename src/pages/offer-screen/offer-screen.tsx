@@ -26,6 +26,8 @@ function OfferScreen({ offers, reviews }: OfferScreenProps): JSX.Element {
     return <NotFoundScreen />;
   }
 
+  const selectedOfferId = offer.id || null;
+
   const {
     title,
     type,
@@ -155,7 +157,7 @@ function OfferScreen({ offers, reviews }: OfferScreenProps): JSX.Element {
             className="offer__map"
             city={selectedCity}
             offers={offersForMap}
-            selectedOffer={offer}
+            selectedOfferId={selectedOfferId}
           />
         </section>
         <div className="container">
@@ -168,8 +170,7 @@ function OfferScreen({ offers, reviews }: OfferScreenProps): JSX.Element {
                 <PlaceCard
                   key={nearbyOffer.id}
                   offer={nearbyOffer}
-                  cardType="Near"
-                  handleCardHover={() => {}}
+                  cardType="near"
                 />
               ))}
             </div>

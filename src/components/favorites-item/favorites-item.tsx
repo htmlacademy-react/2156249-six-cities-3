@@ -21,8 +21,7 @@ function FavoritesItem({ city, offers }: FavoritesItemProps): JSX.Element {
           <PlaceCard
             key={offer.id}
             offer={offer}
-            cardType="Favorites"
-            handleCardHover={() => {}}
+            cardType="favorites"
           />
         ))}
       </div>

@@ -9,7 +9,7 @@ import BookmarkButton from '../bookmark-button/bookmark-button';
 type PlaceCardProps = {
   offer: Offer;
   cardType: CardType;
-  handleCardHover: (offer: Offer | null) => void;
+  handleCardHover?: (offer: Offer | null) => void;
 };
 
 function PlaceCard({
@@ -25,8 +25,8 @@ function PlaceCard({
   return (
     <article
       className={config.cardClass}
-      onMouseEnter={() => handleCardHover(offer)}
-      onMouseLeave={() => handleCardHover(null)}
+      onMouseEnter={() => handleCardHover?.(offer)}
+      onMouseLeave={() => handleCardHover?.(null)}
     >
       {isPremium && <Badge text="Premium" parentType="card" />}
 
