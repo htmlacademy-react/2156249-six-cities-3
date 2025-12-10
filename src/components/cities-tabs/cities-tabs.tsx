@@ -1,14 +1,17 @@
+import { useAppDispatch } from '@/hooks';
+import { setCity } from '@/store/actions';
+
 type CitiesTabsProps = {
   cities: string[];
   activeCity: string;
-  onCityChange: (city: string) => void;
 };
 
 function CitiesTabs({
   cities,
   activeCity,
-  onCityChange,
 }: CitiesTabsProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   return (
     <div className="tabs">
       <section className="locations container">
@@ -22,7 +25,7 @@ function CitiesTabs({
                 href="#"
                 onClick={(evt) => {
                   evt.preventDefault();
-                  onCityChange(city);
+                  dispatch(setCity(city));
                 }}
               >
                 <span>{city}</span>

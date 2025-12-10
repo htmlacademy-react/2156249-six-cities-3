@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import clsx from 'clsx';
-import { useAppSelector, useAppDispatch } from '@/hooks';
-import { setCity } from '@/store/actions';
+import { useAppSelector } from '@/hooks';
 import Header from '@/components/header/header';
 import CitiesTabs from '@/components/cities-tabs/cities-tabs';
 import { CITIES } from '@/const';
@@ -17,8 +16,6 @@ const getCityData = (cityName: string): City =>
 function MainScreen(): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.offers);
-
-  const dispatch = useAppDispatch();
 
   const [activeSort, setActiveSort] = useState('Popular');
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
@@ -47,7 +44,6 @@ function MainScreen(): JSX.Element {
         <CitiesTabs
           cities={CITIES}
           activeCity={activeCity}
-          onCityChange={(city) => dispatch(setCity(city))}
         />
         <div className="cities">
           <div
