@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import clsx from 'clsx';
 import { SortOptions } from './const';
 
 type SortingFormProps = {
@@ -19,7 +20,7 @@ function SortingForm({
 
   return (
     <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-caption">Sort by </span>
       <span
         className="places__sorting-type"
         tabIndex={0}
@@ -36,9 +37,9 @@ function SortingForm({
           {Object.values(SortOptions).map((option) => (
             <li
               key={option}
-              className={`places__option ${
-                option === currentSort ? 'places__option--active' : ''
-              }`}
+              className={clsx('places__option', {
+                'places__option--active': option === currentSort,
+              })}
               tabIndex={0}
               onClick={() => handleOptionClick(option)}
             >
