@@ -9,6 +9,7 @@ import OffersList from '@/components/offers-list/offers-list';
 import { City, Offer } from '@/types/offer';
 import Map from '@/components/map/map';
 import { CityCoordinates } from './const';
+import { SortType } from '@/components/sorting-form/const';
 
 const getCityData = (cityName: string): City =>
   CityCoordinates[cityName] || CityCoordinates['Paris'];
@@ -17,7 +18,7 @@ function MainScreen(): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.offers);
 
-  const [activeSort, setActiveSort] = useState('Popular');
+  const [activeSort, setActiveSort] = useState<SortType>('Popular');
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
   const handleCardHover = (offer: Offer | null) => {
@@ -41,10 +42,7 @@ function MainScreen(): JSX.Element {
         })}
       >
         <h1 className="visually-hidden">Cities</h1>
-        <CitiesTabs
-          cities={CITIES}
-          activeCity={activeCity}
-        />
+        <CitiesTabs cities={CITIES} activeCity={activeCity} />
         <div className="cities">
           <div
             className={clsx('cities__places-container', 'container', {
@@ -56,7 +54,8 @@ function MainScreen(): JSX.Element {
                 <div className="cities__status-wrapper tabs__content">
                   <b className="cities__status">No places to stay available</b>
                   <p className="cities__status-description">
-                    We could not find any property available at the moment in {activeCity}
+                    We could not find any property available at the moment in{' '}
+                    {activeCity}
                   </p>
                 </div>
               </section>

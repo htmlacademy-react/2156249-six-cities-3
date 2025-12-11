@@ -4,3 +4,5 @@ export const SortOptions = {
   PriceHighToLow: 'Price: high to low',
   TopRated: 'Top rated first',
 } as const;
+
+export type SortType = keyof typeof SortOptions;

@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import { SortOptions } from './const';
+import { SortType } from './const';
 
 type SortingFormProps = {
-  currentSort: string;
-  onSortChange: (sortType: string) => void;
+  currentSort: SortType;
+  onSortChange: (sortType: SortType) => void;
 };
 
 function SortingForm({
@@ -13,7 +14,7 @@ function SortingForm({
 }: SortingFormProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOptionClick = (option: string) => {
+  const handleOptionClick = (option: SortType) => {
     onSortChange(option);
     setIsOpen(false);
   };
@@ -26,7 +27,7 @@ function SortingForm({
         tabIndex={0}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {currentSort}
+        {SortOptions[currentSort]}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
         </svg>
@@ -34,18 +35,21 @@ function SortingForm({
 
       {isOpen && (
         <ul className="places__options places__options--custom places__options--opened">
-          {Object.values(SortOptions).map((option) => (
-            <li
-              key={option}
-              className={clsx('places__option', {
-                'places__option--active': option === currentSort,
-              })}
-              tabIndex={0}
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
-            </li>
-          ))}
+          {Object.entries(SortOptions).map(([sortKey, option]) => {
+            const key = sortKey as SortType;
+            return (
+              <li
+                key={key}
+                className={clsx('places__option', {
+                  'places__option--active': key === currentSort,
+                })}
+                tabIndex={0}
+                onClick={() => handleOptionClick(key)}
+              >
+                {option}
+              </li>
+            );
+          })}
         </ul>
       )}
     </form>
