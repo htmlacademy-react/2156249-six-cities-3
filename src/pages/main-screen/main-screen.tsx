@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import clsx from 'clsx';
 import { useAppSelector } from '@/hooks';
 import Header from '@/components/header/header';
@@ -6,31 +5,24 @@ import CitiesTabs from '@/components/cities-tabs/cities-tabs';
 import { CITIES } from '@/const';
 import SortingForm from '@/components/sorting-form/sorting-form';
 import OffersList from '@/components/offers-list/offers-list';
-import { City, Offer } from '@/types/offer';
+import { City } from '@/types/offer';
 import Map from '@/components/map/map';
 import { CityCoordinates } from './const';
 
-const getCityData = (cityName: typeof CITIES[number]): City =>
+const getCityData = (cityName: (typeof CITIES)[number]): City =>
   CityCoordinates[cityName] || CityCoordinates['Paris'];
 
 function MainScreen(): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.offers);
   const activeSort = useAppSelector((state) => state.activeSort);
-
-  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
-
-  const handleCardHover = (offer: Offer | null) => {
-    setSelectedOffer(offer || null);
-  };
+  const selectedOfferId = useAppSelector((state) => state.selectedOfferId);
 
   const filteredOffers = offers.filter(
     (offer) => offer.city.name === activeCity
   );
 
   const isEmpty = filteredOffers.length === 0;
-
-  const selectedOfferId = selectedOffer?.id || null;
 
   return (
     <div className="page page--gray page--main">
@@ -64,14 +56,8 @@ function MainScreen(): JSX.Element {
                 <b className="places__found">
                   {filteredOffers.length} places to stay in {activeCity}
                 </b>
-                <SortingForm
-                  currentSort={activeSort}
-                />
-                <OffersList
-                  offers={filteredOffers}
-                  cardType="main"
-                  handleCardHover={handleCardHover}
-                />
+                <SortingForm currentSort={activeSort} />
+                <OffersList offers={filteredOffers} cardType="main" />
               </section>
             )}
             {isEmpty ? (
