@@ -20,3 +20,13 @@ export const CITIES = [
   'Dusseldorf',
 ] as const;
 
+export enum APIRoute {
+  Offers = '/offers',
+  Offer = '/offers/:id',
+  Nearby = '/offers/:id/nearby',
+  Favorite = '/favorite',
+  Login = '/login',
+  Logout = '/logout',
+  Comments ='/comments/:offerId',
+}
+
