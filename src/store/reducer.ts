@@ -7,6 +7,7 @@ import {
   setSelectedOfferId,
   loadOffers,
   requireAuthorization,
+  setError,
 } from './actions';
 import { reviews } from '@/mocks/reviews';
 import { CITIES, AuthorizationStatus } from '@/const';
@@ -19,6 +20,7 @@ type State = {
   activeSort: SortType;
   selectedOfferId: string | null;
   authorizationStatus: AuthorizationStatus;
+  error: string | null;
 };
 
 const initialState: State = {
@@ -28,6 +30,7 @@ const initialState: State = {
   activeSort: 'Popular',
   selectedOfferId: null,
   authorizationStatus: AuthorizationStatus.Unknown,
+  error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -46,6 +49,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });
 
