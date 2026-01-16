@@ -11,3 +11,4 @@ export const setSelectedOfferId = createAction<string | null>(
 export const loadOffers = createAction<Offer[]>('loadOffers');
 export const requireAuthorization = createAction<AuthorizationStatus>('requireAuthorization');
 export const setError = createAction<string | null>('setError');
+export const setOffersDataLoadingStatus = createAction<boolean>('setOffersDataLoadingStatus');

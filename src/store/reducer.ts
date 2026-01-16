@@ -8,6 +8,7 @@ import {
   loadOffers,
   requireAuthorization,
   setError,
+  setOffersDataLoadingStatus,
 } from './actions';
 import { reviews } from '@/mocks/reviews';
 import { CITIES, AuthorizationStatus } from '@/const';
@@ -20,6 +21,7 @@ type State = {
   activeSort: SortType;
   selectedOfferId: string | null;
   authorizationStatus: AuthorizationStatus;
+  isOffersDataLoading: boolean;
   error: string | null;
 };
 
@@ -30,6 +32,7 @@ const initialState: State = {
   activeSort: 'Popular',
   selectedOfferId: null,
   authorizationStatus: AuthorizationStatus.Unknown,
+  isOffersDataLoading: false,
   error: null,
 };
 
@@ -46,6 +49,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
+    })
+    .addCase(setOffersDataLoadingStatus, (state, action) => {
+      state.isOffersDataLoading = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
