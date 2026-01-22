@@ -29,6 +29,12 @@ export enum APIRoute {
   Favorite = '/favorite',
   Login = '/login',
   Logout = '/logout',
-  Comments ='/comments/:offerId',
+  Comments = '/comments/:offerId',
 }
 
+export enum NameSpace {
+  Offers = 'OFFERS',
+  Auth = 'AUTH',
+  Reviews = 'REVIEWS',
+  Favorites = 'FAVORITES',
+}
