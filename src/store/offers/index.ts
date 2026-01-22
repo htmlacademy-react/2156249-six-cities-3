@@ -1,0 +1,6 @@
+// Ре-экспорт всего
+export { default } from './slice'; // offersSlice.reducer
+export * from './slice'; // actions: setCity, setActiveSort...
+export * from './selectors'; // getOffers, getCity...
+export * from './api-actions'; // fetchOffersAction
+export * from './types'; // OffersState

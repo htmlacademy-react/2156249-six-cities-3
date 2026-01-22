@@ -7,8 +7,14 @@ import FavoritesScreen from './pages/favorites-screen/favorites-screen';
 import OfferScreen from './pages/offer-screen/offer-screen';
 import NotFoundScreen from './pages/not-found-screen/not-found-screen';
 import PrivateRoute from './components/private-route/private-route';
+import { useAppSelector } from './hooks';
+import { getOffersLoadingStatus } from './store/offers';
+import LoadingScreen from './pages/loading-screen/loading-screen';
 
 function App(): JSX.Element {
+  // const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isOffersDataLoading = useAppSelector(getOffersLoadingStatus);
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -41,6 +47,14 @@ function App(): JSX.Element {
       ],
     },
   ]);
+
+  // if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
+  //   return <LoadingScreen />;
+  // }
+
+  if (isOffersDataLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <HelmetProvider>
