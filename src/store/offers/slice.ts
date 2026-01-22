@@ -45,3 +45,6 @@ export const offersSlice = createSlice({
       });
   },
 });
+
+export const { setCity, setActiveSort, setSelectedOfferId } = offersSlice.actions;
+export default offersSlice.reducer;
