@@ -1,13 +1,39 @@
 import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FormEvent, useState } from 'react';
 import Header from '@/components/header/header';
-import { useAppSelector } from '@/hooks';
-import { isAuth } from '@/store/auth';
+import { useAppSelector, useAppDispatch } from '@/hooks';
+import { isAuth, loginAction } from '@/store/auth';
 
 function LoginScreen(): JSX.Element {
+  const [localError, setLocalError] = useState('');
+
   const isAuthorized = useAppSelector(isAuth);
   const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    setLocalError('');
+
+    const form = evt.currentTarget;
+    const formData = new FormData(form);
+
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
+    const hasLetter = /[a-zA-Z]/.test(password);
+    const hasDigit = /\d/.test(password);
+
+    if (!hasLetter || !hasDigit) {
+      setLocalError('Пароль должен содержать хотя бы одну букву и одну цифру');
+      return;
+    }
+
+    dispatch(loginAction({ email, password }));
+  };
 
   useEffect(() => {
     if (isAuthorized) {
@@ -25,7 +51,7 @@ function LoginScreen(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form className="login__form form" onSubmit={handleSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
@@ -46,6 +72,14 @@ function LoginScreen(): JSX.Element {
                   required
                 />
               </div>
+              {localError && (
+                <div
+                  className="login__error"
+                  style={{ color: 'red', marginBottom: '10px' }}
+                >
+                  {localError}
+                </div>
+              )}
               <button
                 className="login__submit form__submit button"
                 type="submit"
