@@ -1,7 +1,20 @@
 import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '@/components/header/header';
+import { useAppSelector } from '@/hooks';
+import { isAuth } from '@/store/auth';
 
 function LoginScreen(): JSX.Element {
+  const isAuthorized = useAppSelector(isAuth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthorized) {
+      navigate('/');
+    }
+  }, [isAuthorized, navigate]);
+
   return (
     <div className="page page--gray page--login">
       <Helmet>
