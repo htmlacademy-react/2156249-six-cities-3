@@ -7,6 +7,7 @@ import ReviewForm from '@/components/review-form/review-form';
 import ReviewsList from '@/components/reviews-list/reviews-list';
 import Map from '@/components/map/map';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 import Badge from '@/components/badge/badge';
 import BookmarkButton from '@/components/bookmark-button/bookmark-button';
 import PlaceCard from '@/components/place-card/place-card';
@@ -17,6 +18,7 @@ import {
   fetchOfferAction,
   fetchNearbyOffersAction,
   clearOffer,
+  getIsOfferLoading,
 } from '@/store/offer';
 import {
   getReviews,
@@ -41,9 +43,14 @@ function OfferScreen(): JSX.Element {
     };
   }, [id, dispatch]);
 
+  const isLoading = useAppSelector(getIsOfferLoading);
   const offer = useAppSelector(getOffer);
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const reviews = useAppSelector(getReviews);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   if (!offer) {
     return <NotFoundScreen />;
