@@ -1,23 +1,56 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import clsx from 'clsx';
-import { FullOffer } from '@/types/offer';
 import Header from '@/components/header/header';
 import ReviewForm from '@/components/review-form/review-form';
 import ReviewsList from '@/components/reviews-list/reviews-list';
 import Map from '@/components/map/map';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 import Badge from '@/components/badge/badge';
 import BookmarkButton from '@/components/bookmark-button/bookmark-button';
 import PlaceCard from '@/components/place-card/place-card';
-import { useAppSelector } from '@/hooks';
-import { getOffers } from '@/store/offers';
+import { useAppSelector, useAppDispatch } from '@/hooks';
+import {
+  getOffer,
+  getNearbyOffers,
+  fetchOfferAction,
+  fetchNearbyOffersAction,
+  clearOffer,
+  getIsOfferLoading,
+} from '@/store/offer';
+import {
+  getReviews,
+  fetchCommentsAction,
+  clearComments,
+} from '@/store/reviews';
 
 function OfferScreen(): JSX.Element {
-  const offers = useAppSelector(getOffers);
-  const reviews = useAppSelector((state) => state.reviews);
   const { id } = useParams();
-  const offer = offers.find((item) => item.id === id) as FullOffer;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchOfferAction(id));
+      dispatch(fetchNearbyOffersAction(id));
+      dispatch(fetchCommentsAction(id));
+    }
+
+    return () => {
+      dispatch(clearOffer());
+      dispatch(clearComments());
+    };
+  }, [id, dispatch]);
+
+  const isLoading = useAppSelector(getIsOfferLoading);
+  const offer = useAppSelector(getOffer);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const reviews = useAppSelector(getReviews);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   if (!offer) {
     return <NotFoundScreen />;
@@ -43,12 +76,6 @@ function OfferScreen(): JSX.Element {
   const { name, avatarUrl, isPro } = host;
 
   const ratingWidth = `${(Math.round(rating) / 5) * 100}%`;
-
-  const nearbyOffers = offers
-    .filter(
-      (item) => item.city.name === offer.city.name && item.id !== offer.id
-    )
-    .slice(0, 3);
 
   const selectedCity = offer.city;
   const offersForMap = [offer, ...nearbyOffers];
@@ -122,7 +149,7 @@ function OfferScreen(): JSX.Element {
                     className={clsx(
                       'offer__avatar-wrapper',
                       'user__avatar-wrapper',
-                      { 'offer__avatar-wrapper--pro': isPro }
+                      { 'offer__avatar-wrapper--pro': isPro },
                     )}
                   >
                     <img

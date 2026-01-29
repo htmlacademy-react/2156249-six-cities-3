@@ -6,9 +6,11 @@ type ReviewsListProps = {
 };
 
 function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {
+  const displayedReviews = reviews.slice(0, 10);
+
   return (
     <ul className="reviews__list">
-      {reviews.map((review) => (
+      {displayedReviews.map((review) => (
         <ReviewItem key={review.id} review={review} />
       ))}
     </ul>
