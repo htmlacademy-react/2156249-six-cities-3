@@ -17,6 +17,9 @@ export const reviewsSlice = createSlice({
     clearComments: (state) => {
       state.reviews = [];
     },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -49,5 +52,5 @@ export const reviewsSlice = createSlice({
   },
 });
 
-export const { clearComments } = reviewsSlice.actions;
+export const { clearComments, clearError } = reviewsSlice.actions;
 export default reviewsSlice.reducer;
