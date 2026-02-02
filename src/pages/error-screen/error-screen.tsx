@@ -7,7 +7,7 @@ function ErrorScreen(): JSX.Element {
 
   return (
     <div className="error-screen">
-      <p className="error-screen__text">Не удалось загрузить предложения</p>
+      <p className="error-screen__text">Failed to load offers</p>
       <button
         onClick={() => {
           dispatch(fetchOffersAction());
@@ -15,7 +15,7 @@ function ErrorScreen(): JSX.Element {
         className="error-screen__button"
         type="button"
       >
-        Попробовать ещё раз
+        Try again
       </button>
     </div>
   );

@@ -40,8 +40,11 @@ export const reviewsSlice = createSlice({
       )
       .addCase(fetchCommentsAction.rejected, (state, action) => {
         state.isLoading = false;
-        state.error =
-          action.error.message || 'Не удалось загрузить комментарии';
+        if (action.error.message?.includes('404')) {
+          state.error = null;
+        } else {
+          state.error = action.error.message || 'Failed to load reviews';
+        }
       })
       .addCase(postCommentAction.pending, (state) => {
         state.isSubmitting = true;
@@ -57,7 +60,7 @@ export const reviewsSlice = createSlice({
       .addCase(postCommentAction.rejected, (state, action) => {
         state.isSubmitting = false;
         state.error =
-          action.error.message || 'Не удалось отправить комментарий';
+          action.error.message || 'Failed to send comment';
       });
   },
 });

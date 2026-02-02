@@ -36,8 +36,11 @@ export const offerSlice = createSlice({
       )
       .addCase(fetchOfferAction.rejected, (state, action) => {
         state.isLoading = false;
-        state.error =
-          action.error.message || 'Не удалось загрузить предложение';
+        if (action.error.message?.includes('404')) {
+          state.error = null;
+        } else {
+          state.error = action.error.message || 'Failed to load offer';
+        }
       })
       .addCase(
         fetchNearbyOffersAction.fulfilled,
