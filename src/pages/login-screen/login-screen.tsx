@@ -10,7 +10,7 @@ import {
   getIsSubmitting,
   // getAuthError,
 } from '@/store/auth';
-import { clearError } from '@/store/auth/slice';
+import { clearAuthError } from '@/store/auth/slice';
 import { CITIES, AppRoute } from '@/const';
 import { setCity } from '@/store/offers';
 
@@ -61,7 +61,7 @@ function LoginScreen(): JSX.Element {
 
   useEffect(
     () => () => {
-      dispatch(clearError());
+      dispatch(clearAuthError());
     },
     [dispatch],
   );

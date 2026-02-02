@@ -6,7 +6,7 @@ import {
   getIsSubmitting,
   postCommentAction,
   getReviewsError,
-  clearError,
+  clearReviewsError,
 } from '@/store/reviews';
 import { isAuth } from '@/store/auth';
 
@@ -30,7 +30,7 @@ function ReviewForm(): JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(clearError());
+    dispatch(clearReviewsError());
 
     if (id && rating && userComment.length >= MIN_REVIEW_LENGTH) {
       dispatch(

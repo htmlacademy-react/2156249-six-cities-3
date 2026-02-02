@@ -6,7 +6,7 @@ import { CommentData } from './types';
 
 export const fetchCommentsAction = createAsyncThunk<
   Review[],
-  string, // id предложения
+  string,
   {
     extra: AxiosInstance;
   }

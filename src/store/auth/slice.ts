@@ -16,7 +16,7 @@ export const authSlice = createSlice({
   name: NameSpace.Auth,
   initialState,
   reducers: {
-    clearError: (state) => {
+    clearAuthError: (state) => {
       state.error = null;
     },
   },
@@ -61,5 +61,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { clearError } = authSlice.actions;
+export const { clearAuthError } = authSlice.actions;
 export default authSlice.reducer;
