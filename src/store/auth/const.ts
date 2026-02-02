@@ -1,8 +1,8 @@
 export const AuthErrorMessages = {
-  UNAUTHORIZED: 'Неверный email или пароль',
-  NOT_FOUND: 'Сервер авторизации недоступен, попробуйте позже',
-  BAD_REQUEST: 'Неверные данные для входа',
-  NETWORK_ERROR: 'Проблемы с соединением. Проверьте интернет',
-  SERVER_ERROR: 'Ошибка сервера. Попробуйте позже',
-  DEFAULT: 'Не удалось войти. Попробуйте снова',
+  UNAUTHORIZED: 'Wrong email or password',
+  NOT_FOUND: 'Authorization server unavailable, please try again later',
+  BAD_REQUEST: 'Invalid login data',
+  NETWORK_ERROR: 'Connection problems. Check your internet',
+  SERVER_ERROR: 'Server error. Please try again later',
+  DEFAULT: 'Failed to login. Please try again',
 } as const;

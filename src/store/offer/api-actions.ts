@@ -5,7 +5,7 @@ import { FullOffer, Offer } from '@/types/offer';
 
 export const fetchOfferAction = createAsyncThunk<
   FullOffer,
-  string, // id предложения
+  string,
   {
     extra: AxiosInstance;
   }
@@ -16,7 +16,7 @@ export const fetchOfferAction = createAsyncThunk<
 
 export const fetchNearbyOffersAction = createAsyncThunk<
   Offer[],
-  string, // id предложения
+  string,
   {
     extra: AxiosInstance;
   }

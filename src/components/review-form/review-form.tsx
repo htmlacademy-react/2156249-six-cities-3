@@ -55,7 +55,9 @@ function ReviewForm(): JSX.Element {
   if (!isAuthorized) {
     return (
       <div className="reviews__form">
-        <p>Только авторизованные пользователь могут оставлять комментарии</p>
+        <p className="reviews__message" style={{ color: 'red' }}>
+          Only authorized users can leave reviews
+        </p>
       </div>
     );
   }
