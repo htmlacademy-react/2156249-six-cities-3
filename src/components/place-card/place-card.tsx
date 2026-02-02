@@ -7,7 +7,7 @@ import Badge from '../badge/badge';
 import BookmarkButton from '../bookmark-button/bookmark-button';
 import { useAppDispatch } from '@/hooks';
 import { setSelectedOfferId } from '@/store/offers';
-import { formatType } from './utils';
+import { formatType } from '@/utils';
 
 type PlaceCardProps = {
   offer: Offer;

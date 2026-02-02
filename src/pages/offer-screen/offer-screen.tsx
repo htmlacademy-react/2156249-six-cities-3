@@ -25,6 +25,7 @@ import {
   fetchCommentsAction,
   clearComments,
 } from '@/store/reviews';
+import { formatType } from '@/utils';
 
 function OfferScreen(): JSX.Element {
   const { id } = useParams();
@@ -119,7 +120,7 @@ function OfferScreen(): JSX.Element {
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {type}
+                  {formatType(type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   {bedrooms} {bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}
