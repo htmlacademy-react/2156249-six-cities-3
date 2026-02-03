@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import clsx from 'clsx';
 import Header from '@/components/header/header';
 import ReviewForm from '@/components/review-form/review-form';
 import ReviewsList from '@/components/reviews-list/reviews-list';
 import Map from '@/components/map/map';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 import Badge from '@/components/badge/badge';
 import BookmarkButton from '@/components/bookmark-button/bookmark-button';
 import PlaceCard from '@/components/place-card/place-card';
+import FullPageError from '@/components/full-page-error/full-page-error';
 import { useAppSelector, useAppDispatch } from '@/hooks';
 import {
   getOffer,
@@ -18,9 +18,11 @@ import {
   fetchOfferAction,
   fetchNearbyOffersAction,
   getIsOfferLoading,
+  getOfferError,
 } from '@/store/offer';
 import { getReviews, fetchCommentsAction } from '@/store/reviews';
 import { formatType } from '@/utils';
+import { AppRoute } from '@/const';
 
 function OfferScreen(): JSX.Element {
   const { id } = useParams();
@@ -38,13 +40,18 @@ function OfferScreen(): JSX.Element {
   const offer = useAppSelector(getOffer);
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const reviews = useAppSelector(getReviews);
+  const error = useAppSelector(getOfferError);
 
   if (isLoading) {
     return <LoadingScreen />;
   }
 
-  if (!offer) {
-    return <NotFoundScreen />;
+  if (error?.includes('404')) {
+    return <Navigate to={AppRoute.NotFound} replace />;
+  }
+
+  if (error || !offer) {
+    return <FullPageError error={error} />;
   }
 
   const selectedOfferId = offer.id || null;
