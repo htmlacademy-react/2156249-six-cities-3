@@ -9,6 +9,7 @@ const initialState: OfferState = {
   nearbyOffers: [],
   isLoading: false,
   error: null,
+  nearbyError: null,
 };
 
 export const offerSlice = createSlice({
@@ -26,6 +27,7 @@ export const offerSlice = createSlice({
         state.isLoading = true;
         state.error = null;
         state.nearbyOffers = [];
+        state.nearbyError = null;
       })
       .addCase(
         fetchOfferAction.fulfilled,
@@ -43,7 +45,11 @@ export const offerSlice = createSlice({
         (state, action: PayloadAction<Offer[]>) => {
           state.nearbyOffers = action.payload;
         },
-      );
+      )
+      .addCase(fetchNearbyOffersAction.rejected, (state, action) => {
+        state.nearbyError =
+          action.error.message || 'Failed to load nearby places';
+      });
   },
 });
 
