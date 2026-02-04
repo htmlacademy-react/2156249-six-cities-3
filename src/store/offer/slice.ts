@@ -21,6 +21,9 @@ export const offerSlice = createSlice({
       state.offer = null;
       state.nearbyOffers = [];
     },
+    clearError: (state) => {
+      state.error = null;
+    },
     clearNearbyLoadError: (state) => {
       state.nearbyLoadError = null;
     },
@@ -63,6 +66,6 @@ export const offerSlice = createSlice({
   },
 });
 
-export const { clearOffer, clearNearbyLoadError, clearNearbyToastError } =
+export const { clearOffer, clearError, clearNearbyLoadError, clearNearbyToastError } =
   offerSlice.actions;
 export default offerSlice.reducer;

@@ -20,6 +20,7 @@ import {
   getIsOfferLoading,
   getOfferError,
   getNearbyLoadError,
+  clearError,
 } from '@/store/offer';
 import { getReviews, fetchCommentsAction } from '@/store/reviews';
 import { formatType } from '@/utils';
@@ -40,6 +41,10 @@ function OfferScreen(): JSX.Element {
         })
         .catch(() => {});
     }
+
+    return () => {
+      dispatch(clearError());
+    };
   }, [id, dispatch]);
 
   const isLoading = useAppSelector(getIsOfferLoading);
