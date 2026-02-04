@@ -19,10 +19,12 @@ import {
   fetchNearbyOffersAction,
   getIsOfferLoading,
   getOfferError,
+  getNearbyError,
 } from '@/store/offer';
 import { getReviews, fetchCommentsAction } from '@/store/reviews';
 import { formatType } from '@/utils';
 import { AppRoute } from '@/const';
+import ErrorPanel from '@/components/error-panel/error-panel';
 
 function OfferScreen(): JSX.Element {
   const { id } = useParams();
@@ -36,8 +38,7 @@ function OfferScreen(): JSX.Element {
           dispatch(fetchNearbyOffersAction(id));
           dispatch(fetchCommentsAction(id));
         })
-        .catch(() => {
-        });
+        .catch(() => {});
     }
   }, [id, dispatch]);
 
@@ -46,6 +47,7 @@ function OfferScreen(): JSX.Element {
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const reviews = useAppSelector(getReviews);
   const error = useAppSelector(getOfferError);
+  const nearbyError = useAppSelector(getNearbyError);
 
   if (isLoading) {
     return <Loading />;
@@ -192,15 +194,19 @@ function OfferScreen(): JSX.Element {
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
-            <div className="near-places__list places__list">
-              {nearbyOffers.map((nearbyOffer) => (
-                <PlaceCard
-                  key={nearbyOffer.id}
-                  offer={nearbyOffer}
-                  cardType="near"
-                />
-              ))}
-            </div>
+            {nearbyError ? (
+              <ErrorPanel message="Failed to load nearby places. Please try again later." />
+            ) : (
+              <div className="near-places__list places__list">
+                {nearbyOffers.map((nearbyOffer) => (
+                  <PlaceCard
+                    key={nearbyOffer.id}
+                    offer={nearbyOffer}
+                    cardType="near"
+                  />
+                ))}
+              </div>
+            )}
           </section>
         </div>
       </main>
