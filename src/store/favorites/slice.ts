@@ -11,6 +11,7 @@ const initialState: FavoritesState = {
   favorites: [],
   isLoading: false,
   favoritesError: null,
+  favoritesToastError: null,
 };
 
 export const favoritesSlice = createSlice({
@@ -20,12 +21,16 @@ export const favoritesSlice = createSlice({
     clearFavoritesError(state) {
       state.favoritesError = null;
     },
+    clearFavoritesToastError(state) {
+      state.favoritesToastError = null;
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFavoritesAction.pending, (state) => {
         state.isLoading = true;
         state.favoritesError = null;
+        state.favoritesToastError = null;
       })
       .addCase(
         fetchFavoritesAction.fulfilled,
@@ -33,11 +38,14 @@ export const favoritesSlice = createSlice({
           state.favorites = action.payload;
           state.isLoading = false;
           state.favoritesError = null;
+          state.favoritesToastError = null;
         },
       )
       .addCase(fetchFavoritesAction.rejected, (state, action) => {
         state.isLoading = false;
         state.favoritesError =
+          action.error.message || 'Failed to load favorites';
+        state.favoritesToastError =
           action.error.message || 'Failed to load favorites';
       })
       .addCase(
@@ -55,11 +63,11 @@ export const favoritesSlice = createSlice({
         },
       )
       .addCase(changeFavoriteStatusAction.rejected, (state, action) => {
-        state.favoritesError =
+        state.favoritesToastError =
           action.error.message || 'Failed to update favorite';
       });
   },
 });
 
-export const { clearFavoritesError } = favoritesSlice.actions;
+export const { clearFavoritesError, clearFavoritesToastError } = favoritesSlice.actions;
 export default favoritesSlice.reducer;
