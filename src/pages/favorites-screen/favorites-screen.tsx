@@ -1,15 +1,28 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useAppSelector } from '@/hooks';
+import { useAppSelector, useAppDispatch } from '@/hooks';
 import Header from '@/components/header/header';
 import Logo from '@/components/logo/logo';
 import FavoritesList from '@/components/favorites-list/favorites-list';
 import FavoritesEmpty from '@/components/favorites-empty/favorites-empty';
-import { getFavorites, getFavoritesLoading } from '@/store/favorites';
+import {
+  getFavorites,
+  getFavoritesLoading,
+  getFavoritesError,
+  fetchFavoritesAction,
+} from '@/store/favorites';
 import Loading from '@/components/loading/loading';
+import ErrorPanel from '@/components/error-panel/error-panel';
 
 function FavoritesScreen(): JSX.Element {
   const favoriteOffers = useAppSelector(getFavorites);
   const isLoading = useAppSelector(getFavoritesLoading);
+  const favoritesError = useAppSelector(getFavoritesError);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFavoritesAction());
+  }, [dispatch]);
 
   if (isLoading) {
     return <Loading />;
@@ -23,9 +36,11 @@ function FavoritesScreen(): JSX.Element {
       <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          {!favoriteOffers.length ? (
-            <FavoritesEmpty />
-          ) : (
+          {favoritesError && (
+            <ErrorPanel message="Failed to load favorites. Please try again later." />
+          )}
+          {!favoritesError && !favoriteOffers.length && <FavoritesEmpty />}
+          {!favoritesError && favoriteOffers.length > 0 && (
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <FavoritesList favorites={favoriteOffers} />

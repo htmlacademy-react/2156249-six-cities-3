@@ -32,6 +32,7 @@ export const favoritesSlice = createSlice({
         (state, action: PayloadAction<Offer[]>) => {
           state.favorites = action.payload;
           state.isLoading = false;
+          state.favoritesError = null;
         },
       )
       .addCase(fetchFavoritesAction.rejected, (state, action) => {
