@@ -4,10 +4,16 @@ import Header from '@/components/header/header';
 import Logo from '@/components/logo/logo';
 import FavoritesList from '@/components/favorites-list/favorites-list';
 import FavoritesEmpty from '@/components/favorites-empty/favorites-empty';
-import { getFavorites } from '@/store/favorites';
+import { getFavorites, getFavoritesLoading } from '@/store/favorites';
+import Loading from '@/components/loading/loading';
 
 function FavoritesScreen(): JSX.Element {
   const favoriteOffers = useAppSelector(getFavorites);
+  const isLoading = useAppSelector(getFavoritesLoading);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="page">
