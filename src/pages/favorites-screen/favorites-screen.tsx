@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector, useAppDispatch } from '@/hooks';
@@ -29,12 +30,21 @@ function FavoritesScreen(): JSX.Element {
   }
 
   return (
-    <div className="page">
+    <div
+      className={clsx('page', {
+        'page--favorites-empty': !favoritesError && !favoriteOffers.length,
+      })}
+    >
       <Helmet>
         <title>6 cities: favorites</title>
       </Helmet>
       <Header />
-      <main className="page__main page__main--favorites">
+      <main
+        className={clsx('page__main page__main--favorites', {
+          'page__main--favorites-empty':
+            !favoritesError && !favoriteOffers.length,
+        })}
+      >
         <div className="page__favorites-container container">
           {favoritesError && (
             <ErrorPanel message="Failed to load favorites. Please try again later." />
