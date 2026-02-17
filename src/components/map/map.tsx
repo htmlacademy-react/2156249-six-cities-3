@@ -5,12 +5,13 @@ import 'leaflet/dist/leaflet.css';
 import { City, Offer } from '@/types/offer';
 import useMap from '@/hooks/use-map';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from './const';
+import { useAppSelector } from '@/hooks';
+import { getSelectedOfferId } from '@/store/offers';
 
 type MapProps = {
   className: string;
   city: City;
   offers: Offer[];
-  selectedOfferId: string | null;
 };
 
 const defaultCustomIcon = leaflet.icon({
@@ -25,14 +26,10 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [13, 39],
 });
 
-function Map({
-  className,
-  city,
-  offers,
-  selectedOfferId,
-}: MapProps): JSX.Element {
+function Map({ className, city, offers }: MapProps): JSX.Element {
   const mapContainerRef = useRef(null);
   const map = useMap(mapContainerRef, city);
+  const selectedOfferId = useAppSelector(getSelectedOfferId);
 
   useEffect(() => {
     if (!map) {
@@ -53,7 +50,7 @@ function Map({
               offer.id === selectedOfferId
                 ? currentCustomIcon
                 : defaultCustomIcon,
-          }
+          },
         )
         .addTo(markerLayer);
     });
@@ -67,7 +64,7 @@ function Map({
     if (map) {
       map.setView(
         [city.location.latitude, city.location.longitude],
-        city.location.zoom
+        city.location.zoom,
       );
     }
   }, [map, city]);
