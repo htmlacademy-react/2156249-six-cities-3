@@ -3,7 +3,7 @@ import { NameSpace } from '@/const';
 
 export const getOffer = (state: State) => state[NameSpace.Offer].offer;
 export const getNearbyOffers = (state: State) =>
-  state[NameSpace.Offer].nearbyOffers.slice(0, 3);
+  state[NameSpace.Offer].nearbyOffers;
 export const getIsOfferLoading = (state: State) =>
   state[NameSpace.Offer].isLoading;
 export const getOfferError = (state: State) => state[NameSpace.Offer].error;

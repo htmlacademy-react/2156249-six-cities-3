@@ -35,14 +35,15 @@ function ReviewForm(): JSX.Element {
         .then(() => {
           setUserComment('');
           setRating('');
-        });
+        })
+        .catch(() => {});
     }
   };
 
   const isSubmitDisabled =
     rating === '' ||
-    userComment.length < MIN_REVIEW_LENGTH ||
-    userComment.length > MAX_REVIEW_LENGTH ||
+    userComment.length <= MIN_REVIEW_LENGTH ||
+    userComment.length >= MAX_REVIEW_LENGTH ||
     isSubmitting;
 
   const handleRatingChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,11 +51,7 @@ function ReviewForm(): JSX.Element {
   };
 
   const handleReviewChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const text = evt.target.value;
-
-    if (text.length <= MAX_REVIEW_LENGTH) {
-      setUserComment(text);
-    }
+    setUserComment(evt.target.value);
   };
 
   return (
@@ -70,7 +67,7 @@ function ReviewForm(): JSX.Element {
               className="form__rating-input visually-hidden"
               name="rating"
               value={value}
-              id={`${value}-star${value === '1' ? '' : 's'}`}
+              id={`${value}-stars`}
               type="radio"
               checked={rating === value}
               onChange={handleRatingChange}
@@ -78,7 +75,7 @@ function ReviewForm(): JSX.Element {
             />
             <label
               key={`label-${value}`}
-              htmlFor={`${value}-star${value === '1' ? '' : 's'}`}
+              htmlFor={`${value}-stars`}
               className="reviews__rating-label form__rating-label"
               title={title}
             >

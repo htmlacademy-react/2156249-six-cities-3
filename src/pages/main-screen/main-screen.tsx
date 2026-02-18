@@ -8,14 +8,10 @@ import SortingForm from '@/components/sorting-form/sorting-form';
 import OffersList from '@/components/offers-list/offers-list';
 import { City } from '@/types/offer';
 import Map from '@/components/map/map';
+import MainEmpty from '@/components/main-empty/main-empty';
 import { CityCoordinates } from './const';
 import { sortOffers } from '@/utils';
-import {
-  getCity,
-  getOffers,
-  getActiveSort,
-  getSelectedOfferId,
-} from '@/store/offers';
+import { getCity, getOffers, getActiveSort } from '@/store/offers';
 
 const getCityData = (cityName: (typeof CITIES)[number]): City =>
   CityCoordinates[cityName] || CityCoordinates['Paris'];
@@ -24,17 +20,15 @@ function MainScreen(): JSX.Element {
   const activeCity = useAppSelector(getCity);
   const offers = useAppSelector(getOffers);
   const activeSort = useAppSelector(getActiveSort);
-  const selectedOfferId = useAppSelector(getSelectedOfferId);
 
-  const filteredOffers = offers.filter(
-    (offer) => offer.city.name === activeCity,
-  );
-  const isEmpty = filteredOffers.length === 0;
+  const sortedOffers = useMemo(() => {
+    const filteredOffers = offers.filter(
+      (offer) => offer.city.name === activeCity,
+    );
+    return sortOffers(filteredOffers, activeSort);
+  }, [offers, activeSort, activeCity]);
 
-  const sortedOffers = useMemo(
-    () => sortOffers(filteredOffers, activeSort),
-    [filteredOffers, activeSort],
-  );
+  const isEmpty = sortedOffers.length === 0;
 
   return (
     <div className="page page--gray page--main">
@@ -53,20 +47,14 @@ function MainScreen(): JSX.Element {
             })}
           >
             {isEmpty ? (
-              <section className="cities__no-places">
-                <div className="cities__status-wrapper tabs__content">
-                  <b className="cities__status">No places to stay available</b>
-                  <p className="cities__status-description">
-                    We could not find any property available at the moment in{' '}
-                    {activeCity}
-                  </p>
-                </div>
-              </section>
+              <MainEmpty activeCity={activeCity} />
             ) : (
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">
-                  {filteredOffers.length} places to stay in {activeCity}
+                  {sortedOffers.length}{' '}
+                  {sortedOffers.length === 1 ? 'place' : 'places'} to stay in{' '}
+                  {activeCity}
                 </b>
                 <SortingForm currentSort={activeSort} />
                 <OffersList offers={sortedOffers} cardType="main" />
@@ -79,8 +67,7 @@ function MainScreen(): JSX.Element {
                 <Map
                   className="cities__map"
                   city={getCityData(activeCity)}
-                  offers={filteredOffers}
-                  selectedOfferId={selectedOfferId}
+                  offers={sortedOffers}
                 />
               </div>
             )}
