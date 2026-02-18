@@ -4,6 +4,10 @@ export const MAX_RATING = 5;
 
 export const MAX_NEARBY_OFFERS_AMOUNT = 3;
 
+export const MAX_REVIEWS_AMOUNT = 10;
+
+export const MAX_OFFER_IMAGES_AMOUNT = 6;
+
 export const AppRoute = {
   Main: '/',
   Login: '/login',
