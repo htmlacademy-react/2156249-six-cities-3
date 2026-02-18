@@ -24,7 +24,7 @@ import {
 } from '@/store/offer';
 import { getReviews, fetchCommentsAction } from '@/store/reviews';
 import { formatType, calculateRating } from '@/utils';
-import { AppRoute } from '@/const';
+import { AppRoute, MAX_NEARBY_OFFERS_AMOUNT } from '@/const';
 import ErrorPanel from '@/components/error-panel/error-panel';
 import { isAuth } from '@/store/auth';
 
@@ -86,9 +86,10 @@ function OfferScreen(): JSX.Element {
   const { name, avatarUrl, isPro } = host;
 
   const ratingWidth = calculateRating(rating);
+  const displayedNearbyOffers = nearbyOffers.slice(0, MAX_NEARBY_OFFERS_AMOUNT);
 
   const selectedCity = offer.city;
-  const offersForMap = [offer, ...nearbyOffers];
+  const offersForMap = [offer, ...displayedNearbyOffers];
 
   return (
     <div className="page">
@@ -214,7 +215,7 @@ function OfferScreen(): JSX.Element {
               <ErrorPanel message="Failed to load nearby places. Please try again later." />
             ) : (
               <div className="near-places__list places__list">
-                {nearbyOffers.map((nearbyOffer) => (
+                {displayedNearbyOffers.map((nearbyOffer) => (
                   <PlaceCard
                     key={nearbyOffer.id}
                     offer={nearbyOffer}
